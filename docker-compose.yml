@@ -4,18 +4,16 @@ services:
     container_name: wp_mysql
     restart: always
     environment:
-      - MYSQL_DATABASE: ${MYSQL_DATABASE}
-      - MYSQL_USER: ${MYSQL_USER}
-      - MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      - MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
-
-    networks: 
+    networks:
       - wp_network
 
-  wordpress: 
+  wordpress:
     build: .
     container_name: wp_laboratorio
     depends_on:
@@ -28,18 +26,15 @@ services:
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
       WORDPRESS_DB_USER: ${MYSQL_USER}
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-
     volumes:
-      - wp_data:/var/lib/mysql
-
-    networks: 
+      - wp_data:/var/www/html
+    networks:
       - wp_network
-  networks:
-    wp_network:
-      driver: bridge
 
-  volumes:
-    db_data:
-    wp_data:
+networks:
+  wp_network:
+    driver: bridge
 
-
+volumes:
+  db_data:
+  wp_data:
