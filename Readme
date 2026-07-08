@@ -1,0 +1,34 @@
+# OA Laboratorio 1
+
+WordPress + MySQL con Docker Compose, desplegado vía Jenkins.
+
+## Uso
+
+1. Crear un archivo `.env`:
+
+```env
+MYSQL_DATABASE=nombre_bd
+MYSQL_USER=usuario
+MYSQL_PASSWORD=password
+MYSQL_ROOT_PASSWORD=password_root
+WORDPRESS_PORT=8081
+```
+
+2. Levantar los contenedores:
+
+```bash
+docker compose up -d --build
+```
+
+3. Entrar a `http://localhost:8081`
+
+## Pipeline (Jenkins)
+
+Clona el repo → detiene contenedores previos → despliega con `docker compose` → configura la conexión a la DB → verifica que el sitio responda.
+
+## Autores
+
+Gustavo Mata Avellan
+Bruno ly
+Josue Abarca
+
